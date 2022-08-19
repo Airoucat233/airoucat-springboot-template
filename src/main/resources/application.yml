@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      db:
+        enabled: true
+        url: jdbc:oracle:thin:@//ip:1521/user
+        username: lx1user
+        password: lx1Qjyy
+        driverClassName: oracle.jdbc.OracleDriver
+      initialSize: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        allow:
+        url-pattern: /druid/*
+        login-username: airoucat
+        login-password: 123456
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+
+
+mybatis-plus:
+  type-aliases-package: com.airoucat.**.domain
+  mapper-locations: classpath:mapper/*Mapper.xml
+#  config-location: classpath:mybatis/mybatis-config.xml
+  configuration:
+    cacheEnabled: true
+    useGeneratedKeys: true
+#  global-config:
+#    db-config:
+#      logic-delete-field: delFlag
+#      logic-delete-value: 2
+#      logic-not-delete-value: 0
+logging:
+  file:
+    path: /project_log/airoucat
+
+pagehelper:
+  autoRuntimeDialect: true
+  supportMethodsArguments: true
+  params: count=countSql

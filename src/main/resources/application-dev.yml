@@ -1,0 +1,61 @@
+server:
+  port: 9999
+logging:
+  level:
+    com.qjyy.airoucatspringboottemplate.mapper: debug
+
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: pwd
+    timeout: 20000 # redis连接超时时间（单位毫秒）
+    # redis连接池配置
+    pool:
+      max-active: 8 # 最大可用连接数（默认为8，负数表示无限）
+      max-idle: 8 # 最大空闲连接数（默认为8，负数表示无限）
+      min-idle: 0 # 最小空闲连接数（默认为0，该值只有为正数才有用）
+      max-wait: -1 # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+  datasource:
+    druid:
+      master:
+        url: jdbc:mysql://127.0.0.1:3306/<datebase>?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: user
+        password: pwd
+        driverClassName: com.mysql.cj.jdbc.Driver
+  # 配置邮箱服务器，账号密码等
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: user
+    password: pwd
+    # 配置SSL 加密工厂
+    properties:
+      mail:
+        smtp:
+#          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: true
+        #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        debug: false
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
+#    listener:
+#      simple:
+#        acknowledge-mode: manual # 手动应答
+#        concurrency: 5 # 消费端最小并发数
+#        max-concurrency: 10 # 消费端最大并发数
+#        prefetch: 5 # 一次请求中预处理的消息数量
+#    cache:
+#      channel:
+#        size: 50 # 缓存的channel数量
+#    ### 自定义配置
+#    custom:
+#      defaultExchange: qjyy.direct # 默认交换器
+#      queue: python.invoker # 队列名
+#      routeKey: python_invoker # 路由key
